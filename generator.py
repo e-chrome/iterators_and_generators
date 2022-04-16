@@ -2,14 +2,15 @@ from nested_list import nested_list
 
 
 def flat_generator(list_):
-    index = 0
-    while index < len(list_):
-        if type(list_[index]) is list:
-            flat_generator(list_[index])
+    for item in list_:
+        if type(item) is list:
+            for sub_item in flat_generator(item):
+                yield sub_item
         else:
-            yield list_[index]
-            index += 1
+            yield item
 
 
-for item in flat_generator(nested_list):
-    print(item)
+if __name__ == '__main__':
+
+    for item in flat_generator(nested_list):
+        print(item)
